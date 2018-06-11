@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmls:th="http://www.thymeleaf.org">
+
+<body>
+
+	<div th:fragment="common-navbar"
+		class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a th:text="#{navbar.home.text}" href="/"></a></li>
+					<li><a th:text="#{navbar.about.text}" href="/about"></a></li>
+					<li><a th:text="#{navbar.team.text}" href="/team"></a></li>
+					<li><a th:text="#{navbar.match.text}" href="/match"></a></li>
+					<li><a th:text="#{navbar.contact.text}" href="/contact"></a></li>
+				</ul>
+
+
+				<ul class="nav navbar-nav navbar-right">
+					<li th:if="${#authorization.expression('!isAuthenticated()')}">
+						<a th:href="@{/login}" th:text="#{navbar.login.text}" />
+					</li>
+					<li th:if="${#authorization.expression('isAuthenticated()')}">
+						<form id="f" th:action="@{/logout}" method="post" role="form"
+							class="navbar-form">
+							<button type="submit" th:text="#{navbar.logout.text}"
+								class="btn btn-primary" />
+						</form>
+					</li>
+				</ul>
+
+			</div> <!--/.nav-collapse -->
+			
+		</div>
+	</div>
+</body>
+
+</html>

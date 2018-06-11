@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/header :: common-header" />
+
+
+<body>
+
+<div th:replace="common/navbar :: common-navbar" />
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-6 col-md-offset-3">
+
+
+            <div th:if="${signedUp != null}">
+                <div th:if="${signedUp == 'true'}" class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                    <p th:text="#{signup.profile.created.success}" class="text-center"/>
+                </div>
+                <div th:if="${signedUp == 'false'}" class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                    <p th:text="${message}" class="text-center"/>
+                </div>
+            </div>
+
+            <div class="well">
+
+                <h1 th:if="${#httpServletRequest.getParameter('planId') == '1'}" th:text="#{signup.h1.basic.profile}"></h1>
+                <h1 th:if="${#httpServletRequest.getParameter('planId') == '2'}" th:text="#{signup.h1.pro.profile}"></h1>
+                <p class="lead">Please fill in the form to subscribe to DevOps Buddy!</p>
+
+                <form id="signupForm" th:action="@{/signup}"
+                      th:object="${__${T(application.web.controllers.SignupController).PAYLOAD_MODEL_KEY_NAME}__}"
+                      method="post" class="text-left" enctype="multipart/form-data">
+
+                    <!-- Hidden field for the POST request -->
+                    <div th:if="${param.containsKey('planId')}">
+                        <input type="hidden" name="planId" th:value="${#httpServletRequest.getParameter('planId')}" />
+                    </div>
+
+                    <div class="form-group">
+                        <div th:if="${duplicatedUsername}">
+                            <label for="username"
+                                   th:text="#{signup.form.error.username.already.exists}"></label>
+                            <input type="text" id="username" th:field="*{username}"
+                                   class="form-control fieldError" />
+                        </div>
+                        <div th:if="${duplicatedUsername == null}">
+                            <label for="username" th:text="#{signup.form.username}"></label>
+                            <input type="text" id="username" th:field="*{username}"
+                                   class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div th:if="${duplicatedEmail}">
+                            <label for="email" th:text="#{signup.form.error.email.already.exists}" ></label>
+                            <input type="email" id="email" th:field="*{email}" class="form-control fieldError"/>
+                        </div>
+                        <div th:if="${duplicatedEmail == null}">
+                            <label for="email" th:text="#{form.email}"></label>
+                            <input type="email" id="email" th:field="*{email}" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" th:text="#{signup.form.password}"></label>
+                        <input type="password" id="password" th:field="*{password}" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword" th:text="#{signup.form.confirm.password}"></label>
+                        <input type="password" id="confirmPassword" th:field="*{confirmPassword}" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstName" th:text="#{form.firstname}"></label>
+                        <input type="text" id="firstName" th:field="*{firstName}" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName" th:text="#{form.lastname}"></label>
+                        <input type="text" id="lastName" th:field="*{lastName}" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description" th:text="#{signup.form.description}"></label>
+                            <textarea type="text" id="description" th:field="*{description}" class="form-control"
+                                      rows="4"/>
+                    </div>
+
+                   <div class="form-group">
+                        <label for="file" th:text="#{signup.form.profile.image.url}"></label>
+                        <input type="file" id="file" name="file" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country" th:text="#{signup.form.country}"></label>
+                        <select class="form-control" id="country" name="country" th:field="*{country}">
+                            <option value="BG">Bulgaria</option>
+                            <option value="BR">Brazil</option>
+                            <option value="CN">China</option>
+                            <option value="CZ">Czech Republic</option>
+                            <option value="DK">Denmark</option>
+                            <option value="FR">France</option>
+                            <option value="DE">Germany</option>
+                            <option value="IN">India</option>
+                            <option value="MA">Morocco</option>
+                            <option value="NL">Netherlands</option>
+                            <option value="PK">Pakistan</option>
+                            <option value="RO">Romania</option>
+                            <option value="RU">Russia</option>
+                            <option value="SK">Slovakia</option>
+                            <option value="ES">Spain</option>
+                            <option value="TH">Thailand</option>
+                            <option value="AE">United Arab Emirates</option>
+                            <option value="GB">United Kingdom</option>
+                            <option value="US">United States</option>
+                            <option value="VE">Venezuela</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phoneNumber" th:text="#{signup.form.phoneNumber}"></label>
+                        <input type="text" id="phoneNumber" th:field="*{phoneNumber}" class="form-control"
+                               name="phoneNumber" />
+                    </div>
+
+					<!-- Additional HTML form fields for Pro Account subscription -->
+                    <div th:if="${#httpServletRequest.getParameter('planId') == #strings.toString(T(application.enums.PlansEnum).PRO.getId())}">
+                        <div class="form-group">
+                            <label for="cardNumber" th:text="#{signup.form.credit.card.number}"></label>
+                            <input type="text" id="cardNumber" th:field="*{cardNumber}" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardCode" id="cardCode" th:text="#{signup.form.cvv.number}"></label>
+                            <input type="text" th:field="*{cardCode}" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardMonth" th:text="#{signup.form.card.expiration}"></label>
+                            <select id="cardMonth" name="cardMonth">
+                                <option value="1">1 - January</option>
+                                <option value="2">2 - February</option>
+                                <option value="3">3 - March</option>
+                                <option value="4">4 - April</option>
+                                <option value="5">5 - May</option>
+                                <option value="6">6 - June</option>
+                                <option value="7">7 - July</option>
+                                <option value="8">8 - August</option>
+                                <option value="9">9 - September</option>
+                                <option value="10">10 - October</option>
+                                <option value="11">11 - November</option>
+                                <option value="12">12 - December</option>
+                            </select>
+                            <select id="cardYear" name="cardYear">
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                                <option value="2029">2029</option>
+                                <option value="2030">2030</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" th:text="#{form.submit}"></button>
+
+                </form>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div><!-- /.container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<div th:replace="common/header :: before-body-scripts" />
+
+</body>
+</html>

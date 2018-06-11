@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmls:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+    <div th:replace="common/navbar :: common-navbar" />
+
+    <div class="container">
+
+        <div class="jumbotron text-center">
+            <h1 th:text="#{index.h1.text}"></h1>
+            <p class="lead" th:text="#{index.p.lead}"></p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="well">
+                    <h2 class="text-center" th:text="#{index.basic.membership}"></h2>
+                    <h4 th:text="#{index.h4.basic.membership}"></h4>
+                    <br/>
+                    <a class="btn btn-primary btn-lg btn-block"
+                       th:href="@{/signup?planId=1}"
+                       th:text="#{index.basic.signup.button}"></a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="well">
+                    <h2 class="text-center" th:text="#{index.pro.membership}"></h2>
+                    <h4 th:text="#{index.h4.pro.membership}"></h4>
+                    <a class="btn btn-success btn-lg btn-block"
+                       th:href="@{/signup?planId=2}"
+                       th:text="#{index.pro.signup.button}"></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <div th:replace="common/header :: before-body-scripts" />
+
+</body>
+</html>

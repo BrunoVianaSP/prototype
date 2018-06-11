@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: common-header" />
+
+<body>
+    <div th:replace="common/navbar :: common-navbar" />
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-6 col-md-offset-3">
+
+                <div class="well">
+
+                    <div class="text-center">
+
+                        <h1 th:text="#{team.prefh1.text}" />
+                        <p class="lead" th:text="#{team.pref.lead}" />
+
+                    </div>
+
+                    <div class="text-left">
+
+                        <form id="TeamRegistrationForm"
+                              th:action="@{/team/save}"
+                              method="post">
+
+                            <div class="form-group">
+                                <label for="teamprefmaxdistance" th:text="#{team.prefmaxdistance.text}" />
+                                <input type="number" id="teamprefmaxdistance" name="teamprefmaxdistance" class="form-control" />
+                            </div>
+
+							<div class="form-group">
+								<label for="teamlevel" th:text="#{team.teamlevel.text}" /><br>
+                                <input type="radio" name="teamlevel" value="easy" checked> Easy 
+  								<input type="radio" name="teamlevel" value="reasonable"> Reasonable 
+  								<input type="radio" name="teamlevel" value="good"> Good
+  								<input type="radio" name="teamlevel" value="master"> Almost Professional<br>
+                            </div>
+                            
+                            
+                            <div class="form-group">
+								<label for="teamprefdays" th:text="#{team.teamprefdays.text}" /><br>
+                                <div class="form-group">
+                                	<input type="checkbox" name="teamprefdays" value="sunday" checked> Sunday </input>
+                                	<input type="radio" name="sundaytime" value="morning"> Morning 
+  									<input type="radio" name="sundaytime" value="afternoon"> Afternoon 
+  									<input type="radio" name="sundaytime" value="night"> Night 
+  								</div>
+  								
+  								
+  								<div class="form-group">
+                                	<input type="checkbox" name="teamprefdays" value="monday" checked> Monday </input>
+                                	<input type="radio" name="mondaytime" value="morning"> Morning 
+  									<input type="radio" name="mondaytime" value="afternoon"> Afternoon 
+  									<input type="radio" name="mondaytime" value="night"> Night 
+  								</div>
+  								
+  								
+  								
+  								<div class="form-group">
+                                	<input type="checkbox" name="teamprefdays" value="tuesday"> Tuesday </input>
+                                	<input type="radio" name="tuesdaytime" value="morning"> Morning 
+  									<input type="radio" name="tuesdaytime" value="afternoon"> Afternoon 
+  									<input type="radio" name="tuesdaytime" value="night"> Night 
+  								</div>
+  								
+  								
+  								<div class="form-group">
+                                	<input type="checkbox" name="teamprefdays" value="wednesday"> Wednesday </input>
+                                	<input type="radio" name="wednesdaytime" value="morning"> Morning 
+  									<input type="radio" name="wednesdaytime" value="afternoon"> Afternoon 
+  									<input type="radio" name="wednesdaytime" value="night"> Night 
+  								</div>
+  								
+  								<div class="form-group">
+                                	<input type="checkbox" name="teamprefdays" value="thursday"> Thursday </input>
+                                	<input type="radio" name="thursdaytime" value="morning"> Morning 
+  									<input type="radio" name="thursdaytime" value="afternoon"> Afternoon 
+  									<input type="radio" name="thursdaytime" value="night"> Night 
+  								</div>
+  								
+  								<div class="form-group">
+                                	<input type="checkbox" name="teamprefdays" value="friday"> Friday </input>
+                                	<input type="radio" name="fridaytime" value="morning"> Morning 
+  									<input type="radio" name="fridaytime" value="afternoon"> Afternoon 
+  									<input type="radio" name="fridaytime" value="night"> Night 
+  								</div>
+  								
+  								<div class="form-group">
+                                	<input type="checkbox" name="teamprefdays" value="saturday"> Saturday </input>
+                                	<input type="radio" name="saturdaytime" value="morning"> Morning 
+  									<input type="radio" name="saturdaytime" value="afternoon"> Afternoon 
+  									<input type="radio" name="saturdaytime" value="night"> Night 
+  								</div>
+  								
+                            </div>
+                            
+                            
+                            <div class="form-group">
+                                <button type="submit" th:text="#{form.next.text}" class="btn btn-primary" />
+                            </div>
+							
+							
+                            
+							
+							
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <div th:replace="common/header :: before-body-scripts" />
+
+</body>
+</html>

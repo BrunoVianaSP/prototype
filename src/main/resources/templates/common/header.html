@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmls:th="http://www.thymeleaf.org">
+<head th:fragment="common-header">
+
+<title>Full Stack Project Bruno</title>
+
+<!-- Bootstrap core CSS -->
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<style>
+body {
+	padding-top: 50px;
+}
+
+.starter-template {
+	padding: 40px 15px;
+	text-align: center;
+}
+</style>
+</head>
+
+<div th:fragment="before-body-scripts">
+	<script th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/fullstackdev.js}"></script>
+    <script th:src="@{/js/jquery.validate.min.js}"></script>
+</div>
+
+</html>

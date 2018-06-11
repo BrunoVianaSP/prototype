@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/header :: common-header" />
+
+<body>
+    <div th:replace="common/navbar :: common-navbar" />
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-6 col-md-offset-3">
+
+                <div class="well">
+
+                    <div class="text-center">
+
+                        <h1 th:text="#{team.h1.text}" />
+                        <p class="lead" th:text="#{team.p.lead}" />
+
+                    </div>
+
+                    <div class="text-left">
+
+                        <form id="TeamRegistrationForm"
+                              th:action="@{/team/match-preferences}"
+                              method="post">
+
+                            <div class="form-group">
+                                <label for="teamname" th:text="#{team.teamname.text}" />
+                                <input type="text" id="teamname" name="teamname" class="form-control" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="teambirth" th:text="#{team.teambirth.text}" />
+                                <input type="date" id="teambirth" name="teambirth" class="form-control" />
+                            </div>
+                            
+							<div class="form-group">
+                                <label for="teamaddress" th:text="#{team.teamaddress.text}" />
+                                <input type="text" id="teamaddress" name="teamaddress" class="form-control" />
+                            </div>                            
+                            
+                            <div class="form-group">
+                                <label for="teamzone" th:text="#{team.teamzone.text}" />
+                                <input type="text" id="teamaddress" name="teamzone" class="form-control" />
+                            </div>
+
+							<div class="form-group">
+								<label for="teammatchplace" th:text="#{team.teammatchplace.text}" /><br>
+                                <input type="radio" name="teammatchplace" value="home" checked> Home 
+  								<input type="radio" name="teammatchplace" value="away"> Away 
+  								<input type="radio" name="teammatchplace" value="other"> Only Events<br>
+                            </div>
+                            
+                            <div class="form-group">
+								<label for="teammatchmode" th:text="#{team.teammatchmode.text}" /><br>
+                                <input type="checkbox" name="teammatchmodeindoor" value="indoor" checked> Indoor 
+  								<input type="checkbox" name="teammatchmodefield" value="field"> Grass Field 
+  								<input type="checkbox" name="teammatchmodesociety" value="society"> Society<br>
+                            </div>
+                            
+                            <div class="form-group">
+                                <button type="submit" th:text="#{form.next.text}" class="btn btn-primary" />
+                            </div>
+							
+							
+                            
+							
+							
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <div th:replace="common/header :: before-body-scripts" />
+
+</body>
+</html>
